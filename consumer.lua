@@ -6,5 +6,5 @@ hostname = f:read()
 f:close()
 
 for modem in peripherals.find("modem") do
-  if modem.
+  if modem.isOpen(53) then
 end
