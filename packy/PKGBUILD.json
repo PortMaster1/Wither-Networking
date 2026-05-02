@@ -1,0 +1,6 @@
+{
+    "paths": {
+        "packy/PKGBUILD.json": "/etc/packy/PKGBUILD.json",
+        "packy/packy.lua": "/usr/bin/packy.lua"
+    }
+}
