@@ -63,12 +63,7 @@ if not fs.exists(shell.resolve("packy.lua")) then
         file.close()
         packfile.close()
     end
-else
-    -- Moves packy.lua into packages directory
-    if not fs.exists("/usr/bin/packy.lua") then
-        fs.copy(shell.resolve("packy.lua"), "/usr/bin/packy.lua")
-    end
-    print("Copied packy.lua")
+    print("Downloaded packy files")
 end
 print("Packy module confirmed")
 
