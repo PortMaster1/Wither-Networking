@@ -29,8 +29,8 @@ end
 print("/tmp creation confirmed")
 
 -- Creates the directory for installed packages
-if not fs.exists("/usr/bin") then
-    fs.makeDir("/usr/bin")
+if not fs.exists("/usr/bin/packy") then
+    fs.makeDir("/usr/bin/packy")
 end
 print("/usr/bin creation confirmed")
 
@@ -57,7 +57,9 @@ if not fs.exists(shell.resolve("packy.lua")) then
     build.close()
     build = textutils.unserializeJSON(json)
     for rpath, spath in pairs(build["paths"]) do
-        local file = request(MIRRORS[1] .. "packy/" .. rpath)
+        local response = request(MIRRORS[1] .. rpath)
+        local file = http.get(response["download_url"])
+        local packfile = fs.open(spath, "w+")
         -- finish
     end
 end
