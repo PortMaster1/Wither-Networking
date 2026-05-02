@@ -1,6 +1,7 @@
 {
     "paths": {
         "packy/PKGBUILD.json": "/etc/packy/PKGBUILD.json",
-        "packy/packy.lua": "/usr/bin/packy.lua"
+        "packy/packy.lua": "/usr/bin/packy.lua",
+        "packy/mirrorlist.txt": "/etc/packy/mirrorlist.txt"
     }
 }
