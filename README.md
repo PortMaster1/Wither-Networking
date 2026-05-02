@@ -20,4 +20,7 @@ It is formatted as such:
 ```
 - `deps` [optional]:
     - An array of package names that your package depends on
-- 
+- `paths` [required]:
+    - A dictionary of paths that your package files need to go to in the format of
+        key: repository path
+        value: desired system path
