@@ -1,8 +1,7 @@
 print("Initializing Installer")
 
 local MIRROR = "https://api.github.com/repos/PortMaster1/Wither-Networking/contents/"
-
-
+fs.makeDir("/usr/bin")
 
 -- Script adds /usr/bin to path on startup
 if not fs.exists("/startup/packypath.lua") then
@@ -36,7 +35,6 @@ if not fs.exists("/usr/bin/packy.lua") then
     print("Downloaded packy files")
 end
 print("Packy module confirmed")
-
 
 -- Finally
 if not string.find(shell.path(), "/usr/bin") then
