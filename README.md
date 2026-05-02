@@ -16,7 +16,8 @@ It is formatted as such:
     "paths": {
         "README.md": "/etc/pkgname/README.md"
     }
-}```
+}
+```
 - `deps` [optional]:
     - An array of package names that your package depends on
 - 
