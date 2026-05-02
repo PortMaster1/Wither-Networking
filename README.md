@@ -8,3 +8,15 @@ To build your own packages you will need:
 
 
 ## PKGBUILD.json
+The PKGBUILD.json file is what tells packy what your package depends on and where to put the package files.
+It is formatted as such:
+```json
+{
+    "deps": ["pkg1","pkg2"]
+    "paths": {
+        "README.md": "/etc/pkgname/README.md"
+    }
+}```
+- `deps` [optional]:
+    - An array of package names that your package depends on
+- 
