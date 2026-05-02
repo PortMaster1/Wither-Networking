@@ -5,13 +5,6 @@ local MIRRORS = {
     "https://api.github.com/repos/park102/cc/contents/"
 }
 
--- Checks if packy module exists
-if not fs.exists(shell.resolve("packy.lua")) then
-    print("File Not Found")
-    return "File packy.lua not found, please place files in same directory and try again. Exiting with exit code 1"
-end
-print("Packy module confirmed")
-
 -- Creates the directory for mirrorlist
 if not fs.exists("/etc/packy") then
     fs.makeDir("/etc/packy")
@@ -49,6 +42,26 @@ if not fs.exists("/startup/packypath.lua") then
     f.close()
 end
 print("Startup file added")
+
+local function request(url)
+    local file = http.get(url)
+    local json = file.readAll()
+    file.close()
+    return textutils.unserializeJSON(json)
+end
+
+-- Checks if packy module exists
+if not fs.exists(shell.resolve("packy.lua")) then
+    local build = http.get(MIRRORS[1] .. "packy/PKGBUILD.json")
+    local json = build.readAll()
+    build.close()
+    build = textutils.unserializeJSON(json)
+    for rpath, spath in pairs(build["paths"]) do
+        local file = request(MIRRORS[1] .. "packy/" .. rpath)
+        -- finish
+    end
+end
+print("Packy module confirmed")
 
 -- Moves packy.lua into packages directory
 if not fs.exists("/usr/bin/packy.lua") then
