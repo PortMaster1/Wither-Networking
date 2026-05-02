@@ -29,6 +29,12 @@ if not fs.exists("/etc/packy/mirrorlist.txt") then
 end
 print("Mirrorlist added")
 
+-- Creates the directpry for temporary files
+if not fs.exists("/tmp") then
+    fs.makeDir("/tmp")
+end
+print("/tmp creation confirmed")
+
 -- Creates the directory for installed packages
 if not fs.exists("/usr/bin") then
     fs.makeDir("/usr/bin")
