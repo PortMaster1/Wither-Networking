@@ -52,24 +52,26 @@ end
 
 -- Checks if packy module exists
 if not fs.exists(shell.resolve("packy.lua")) then
-    local build = http.get(MIRRORS[1] .. "packy/PKGBUILD.json")
-    local json = build.readAll()
-    build.close()
-    build = textutils.unserializeJSON(json)
+    local build = request(MIRRORS[1] .. "packy/PKGBUILD.json")
     for rpath, spath in pairs(build["paths"]) do
         local response = request(MIRRORS[1] .. rpath)
         local file = http.get(response["download_url"])
+        fs.makeDir(spath) -- Will make a directory where the file goes
+        fs.delete(spath) -- Deletes the directory claiming to be the file
         local packfile = fs.open(spath, "w+")
-        -- finish
+        packfile.write(file.readAll())
+        file.close()
+        packfile.close()
     end
+else
+    -- Moves packy.lua into packages directory
+    if not fs.exists("/usr/bin/packy.lua") then
+        fs.copy(shell.resolve("packy.lua"), "/usr/bin/packy.lua")
+    end
+    print("Copied packy.lua")
 end
 print("Packy module confirmed")
 
--- Moves packy.lua into packages directory
-if not fs.exists("/usr/bin/packy.lua") then
-    fs.copy(shell.resolve("packy.lua"), "/usr/bin/packy.lua")
-end
-print("Copied packy.lua")
 
 -- Finally
 if not string.find(shell.path(), "/usr/bin") then
