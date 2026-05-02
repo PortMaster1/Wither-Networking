@@ -51,7 +51,7 @@ local function request(url)
 end
 
 -- Checks if packy module exists
-if not fs.exists(shell.resolve("packy.lua")) then
+if not fs.exists("/usr/bin/packy.lua") then
     local build = request(MIRRORS[1] .. "packy/PKGBUILD.json")
     for rpath, spath in pairs(build["paths"]) do
         local response = request(MIRRORS[1] .. rpath)
